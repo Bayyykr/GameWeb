@@ -1,0 +1,120 @@
+@keyframes sparkle {
+
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes magic-float {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-15px) rotate(2deg);
+  }
+}
+
+@keyframes glow-gold {
+  0% {
+    filter: drop-shadow(0 0 5px rgba(251, 191, 36, 0.5));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.8));
+  }
+
+  100% {
+    filter: drop-shadow(0 0 5px rgba(251, 191, 36, 0.5));
+  }
+}
+
+@keyframes bouncy {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes squish {
+  0% {
+    transform: scale(1, 1);
+  }
+
+  50% {
+    transform: scale(1.1, 0.9);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce-horizontal {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(10px);
+  }
+}
+
+.animate-sparkle {
+  animation: sparkle 2s infinite ease-in-out;
+}
+
+.animate-magic-float {
+  animation: magic-float 6s infinite ease-in-out;
+}
+
+.animate-glow-gold {
+  animation: glow-gold 3s infinite ease-in-out;
+}
+
+.animate-bouncy {
+  animation: bouncy 3s infinite ease-in-out;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+.animate-bounce-horizontal {
+  animation: bounce-horizontal 2s infinite ease-in-out;
+}
+
+/* tactile button utils */
+.btn-game {
+  @apply transition-all duration-100 active:translate-y-1 active:shadow-none;
+}
+
+.card-game {
+  @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl active:scale-95;
+}

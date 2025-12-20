@@ -1,0 +1,6 @@
+@import "./animation.css";
+@import "tailwindcss";
+
+body {
+  @apply bg-slate-50 text-slate-900 font-fredoka select-none;
+}

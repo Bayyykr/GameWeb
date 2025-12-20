@@ -1,0 +1,4 @@
+export const questionsMath = [
+    { question: '1 + 1', answer: 2 },
+    { question: '2 + 2', answer: 4 }
+];
