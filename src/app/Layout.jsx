@@ -12,7 +12,7 @@ function Layout() {
 
     return (
         <div
-            className="min-h-screen bg-fixed bg-cover bg-center font-fredoka text-slate-100"
+            className="min-h-screen bg-fixed bg-cover bg-center font-outfit text-slate-100"
             style={{ backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), url(${magicBg})` }}
         >
             <nav className="sticky top-4 z-50 max-w-5xl mx-auto px-4">
@@ -50,7 +50,7 @@ function Layout() {
                 </div>
             </nav>
 
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative">
                 <Outlet />
             </main>
 

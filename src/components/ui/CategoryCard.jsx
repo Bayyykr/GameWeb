@@ -17,9 +17,24 @@ function CategoryCard({ title, description, category, color, icon: Icon }) {
             {/* Glossy Overlay */}
             <div className="absolute top-0 left-0 w-full h-1/2 bg-white/10 pointer-events-none rounded-t-[2.5rem]"></div>
 
-            <div className="relative z-10 p-5 rounded-3xl bg-white/20 backdrop-blur-md border-2 border-white/30 text-white mb-6 group-hover:scale-110 transition-transform shadow-xl">
-                {Icon ? <Icon size={48} /> : <div className="w-12 h-12 flex items-center justify-center font-black text-4xl drop-shadow-lg">⚡</div>}
-            </div>
+            {/* Icon/Image Section */}
+            {Icon && typeof Icon === 'string' ? (
+                <div className="relative z-10 mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <img
+                        src={Icon}
+                        alt={title}
+                        className="w-32 h-32 object-contain drop-shadow-[0_10px_10px_rgba(0,0,0,0.3)]"
+                    />
+                </div>
+            ) : (
+                <div className="relative z-10 p-5 rounded-3xl bg-white/20 backdrop-blur-md border-2 border-white/30 text-white mb-6 group-hover:scale-110 transition-transform shadow-xl">
+                    {Icon ? (
+                        <Icon size={48} />
+                    ) : (
+                        <div className="w-12 h-12 flex items-center justify-center font-black text-4xl drop-shadow-lg">⚡</div>
+                    )}
+                </div>
+            )}
 
             <div className="flex-grow flex flex-col items-center">
                 <h3 className="relative z-10 text-2xl font-black text-white mb-2 tracking-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]">

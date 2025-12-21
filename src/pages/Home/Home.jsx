@@ -1,6 +1,8 @@
 import React from 'react'
 import AnimatedBanner from './AnimatedBanner'
 import CategoryCard from '../../components/ui/CategoryCard'
+import hitungAngkaImg from '../../assets/images/hitung_angka.png'
+import bahasaKataImg from '../../assets/images/bahasa_kata.png'
 
 function Home() {
     const categories = [
@@ -9,14 +11,14 @@ function Home() {
             description: 'Latih kemampuan matematika dengan battle sihir dan balap angka!',
             category: 'hitung-angka',
             color: 'blue',
-            icon: null // Placeholder for icon
+            icon: hitungAngkaImg
         },
         {
             title: 'Bahasa & Kata',
             description: 'Asah kosa kata dengan sambung kata dan susun kalimat seru.',
             category: 'bahasa-kata',
             color: 'purple',
-            icon: null
+            icon: bahasaKataImg
         },
         {
             title: 'Logika & Fokus',
