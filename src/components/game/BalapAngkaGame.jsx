@@ -1,16 +1,6 @@
 import React, { useState, useEffect } from 'react';
-/* 
-Images used in the project:
-hitungAngkaImg from '../../assets/images/hitung_angka.png'
-magicBg from '../../assets/images/magic_bg.jpg'
-battleSihirIcon from '../../assets/images/battle_sihir.png'
-balapAngkaIcon from '../../assets/images/balap_angka.png'
-labirinHitungIcon from '../../assets/images/labirin_hitung.png'
-pestaAngkaIcon from '../../assets/images/pesta_angka.png'
-mageImg from '../../assets/mage-avatar.png'
-elfImg from '../../assets/elf-avatar.png'
-monsterImg from '../../assets/monster-avatar.png'
-*/
+import mobilImg from '../../assets/images/mobil.png';
+import flagImg from '../../assets/images/bendera.png';
 
 export default function BalapAngkaGame({ mode, onExit }) {
     const isMultiplayer = mode === 'multiplayer';
@@ -53,24 +43,30 @@ export default function BalapAngkaGame({ mode, onExit }) {
         generateQuestion(1);
         if (isMultiplayer) generateQuestion(2);
 
-        const timer = setInterval(() => {
-            setTimeLeft((prev) => {
-                if (prev <= 1) {
-                    clearInterval(timer);
-                    setGameState((current) => {
-                        if (current !== 'finished') {
-                            setWinType('timeout');
-                            return 'finished';
-                        }
-                        return current;
-                    });
-                    return 0;
-                }
-                return prev - 1;
-            });
-        }, 1000);
+        // Timer only for single player
+        let timer;
+        if (!isMultiplayer) {
+            timer = setInterval(() => {
+                setTimeLeft((prev) => {
+                    if (prev <= 1) {
+                        clearInterval(timer);
+                        setGameState((current) => {
+                            if (current !== 'finished') {
+                                setWinType('timeout');
+                                return 'finished';
+                            }
+                            return current;
+                        });
+                        return 0;
+                    }
+                    return prev - 1;
+                });
+            }, 1000);
+        }
 
-        return () => clearInterval(timer);
+        return () => {
+            if (timer) clearInterval(timer);
+        };
     }, [isMultiplayer]);
 
     const handleNumberClick = (player, num) => {
@@ -150,27 +146,40 @@ export default function BalapAngkaGame({ mode, onExit }) {
     );
 
     const RacingTrack = ({ player, pos, color }) => (
-        <div className="relative w-full h-10 bg-slate-900 rounded-full border-4 border-slate-700 overflow-hidden shadow-inner">
-            <div className="absolute inset-0 flex items-center justify-between px-4 opacity-20">
-                {[...Array(10)].map((_, i) => (
-                    <div key={i} className="h-full w-1 bg-white/50"></div>
+        <div className="relative w-full h-16 bg-slate-900/60 rounded-xl border-b-4 border-slate-700/50 shadow-inner overflow-visible">
+            {/* Track markings */}
+            <div className="absolute inset-0 flex items-center justify-between px-8 opacity-10 pointer-events-none">
+                {[...Array(15)].map((_, i) => (
+                    <div key={i} className="h-full w-1.5 bg-white skew-x-[-20deg]"></div>
                 ))}
             </div>
-            {/* The "Car" (using a simple emoji for now, can replace with image later) */}
+
+            {/* The Car */}
             <div
-                className={`absolute top-1/2 -translate-y-1/2 transition-all duration-500 ease-out`}
+                className="absolute top-1/2 -translate-y-1/2 transition-all duration-500 ease-out z-20"
                 style={{ left: `${pos}%`, transform: `translate(-50%, -50%)` }}
             >
-                <div className={`w-10 h-10 ${color} rounded-lg flex items-center justify-center shadow-lg border-2 border-white/40`}>
-                    <span className="text-xl">{player === 1 ? '🏎️' : '🏎️'}</span>
+                <div className="relative group">
+                    <img
+                        src={mobilImg}
+                        alt="car"
+                        className="w-16 h-10 object-contain drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)] -scale-x-100"
+                    />
+                    {/* Speed Effect */}
+                    <div className="absolute -left-6 top-1/2 -translate-y-1/2 flex gap-1 transform">
+                        <div className="w-6 h-1 bg-gradient-to-l from-white/60 to-transparent rounded-full animate-pulse"></div>
+                        <div className="w-4 h-1 bg-gradient-to-l from-white/40 to-transparent rounded-full animate-pulse delay-75"></div>
+                    </div>
                 </div>
-                {/* Tail Effect */}
-                <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-1.5 bg-gradient-to-r from-transparent to-white/40 rounded-full"></div>
             </div>
-            {/* Finish Line */}
-            <div className="absolute right-0 top-0 bottom-0 w-4 bg-amber-400 shadow-[0_0_15px_#fbbf24] z-10 flex flex-col justify-around py-1">
-                {[...Array(4)].map((_, i) => (
-                    <div key={i} className="w-full h-2 bg-black/50"></div>
+
+            {/* Finish Line - Checkered Pattern */}
+            <div className="absolute right-0 top-0 bottom-0 w-6 bg-white z-10 grid grid-cols-2 grid-rows-[repeat(8,1fr)] shadow-[0_0_15px_rgba(255,255,255,0.3)] border-l border-white/20">
+                {[...Array(16)].map((_, i) => (
+                    <div
+                        key={i}
+                        className={`${((Math.floor(i / 2) + i) % 2 === 0) ? 'bg-black' : 'bg-white'}`}
+                    ></div>
                 ))}
             </div>
         </div>
@@ -184,7 +193,7 @@ export default function BalapAngkaGame({ mode, onExit }) {
             <div className="fixed inset-0 bg-slate-950/90 flex items-center justify-center z-[10000] p-4 backdrop-blur-xl">
                 <div className="bg-indigo-950 p-8 rounded-[3rem] border-8 border-amber-400 shadow-[0_20px_0_0_rgba(0,0,0,0.5)] text-center max-w-lg w-full">
                     <h2 className="text-5xl font-black text-white mb-4 italic uppercase tracking-tighter drop-shadow-[0_8px_0_#1e1b4b]">
-                        {isMultiplayer ? 'GAME OVER' : (winType === 'finish' ? 'HEBAT!' : 'WAKTU HABIS!')}
+                        {isMultiplayer ? 'CONGRATULATIONS' : (winType === 'finish' ? 'HEBAT!' : 'WAKTU HABIS!')}
                     </h2>
                     <p className="text-amber-400 text-3xl font-black mb-8 drop-shadow-md">
                         {subMessage}
@@ -196,32 +205,44 @@ export default function BalapAngkaGame({ mode, onExit }) {
     }
 
     return (
-        <div className="relative w-full max-w-4xl mx-auto p-2 flex flex-col gap-3">
+        <div className="relative w-full max-w-5xl mx-auto p-4 flex flex-col gap-6">
             {/* Header */}
-            <div className="flex justify-between items-center bg-indigo-950/80 p-2.5 rounded-full border-4 border-amber-400 shadow-2xl backdrop-blur-md">
-                <button onClick={onExit} className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded-full font-black text-[10px] shadow-[0_3px_0_0_#991b1b] active:translate-y-1 active:shadow-none transition-all uppercase tracking-widest">KELUAR</button>
-                <div className="flex items-center gap-3">
-                    <div className="bg-black/40 px-3 py-1 rounded-full border-2 border-white/10">
-                        <span className="text-amber-400 font-black text-lg italic tracking-tighter text-shadow-sm">TIME: {timeLeft}s</span>
+            <div className="flex justify-between items-center bg-indigo-950/80 p-3 rounded-2xl border-2 border-white/20 shadow-2xl backdrop-blur-md">
+                <button onClick={onExit} className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-xl font-black text-xs shadow-[0_4px_0_0_#991b1b] active:translate-y-1 active:shadow-none transition-all uppercase tracking-widest">KELUAR</button>
+                {!isMultiplayer && (
+                    <div className="flex items-center gap-3">
+                        <div className="bg-black/40 px-4 py-1.5 rounded-xl border-2 border-white/10">
+                            <span className="text-amber-400 font-black text-xl italic tracking-tighter text-shadow-sm">TIME: {timeLeft}s</span>
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
 
-            {/* Racing Track Area */}
-            <div className="bg-indigo-900/40 rounded-[2rem] p-4 border-4 border-indigo-400/20 backdrop-blur-md flex flex-col gap-4 shadow-2xl">
-                <div className="flex flex-col gap-1">
-                    <div className="flex justify-between items-end mb-0">
-                        <span className="text-white font-black text-[9px] uppercase tracking-widest pl-2">PLAYER 1</span>
-                        <span className="text-amber-400 font-black text-[9px]">{p1Pos}%</span>
+            {/* Racing Track Area - Optimized to not cut off content */}
+            <div className="flex flex-col gap-8 py-4 px-2">
+                <div className="flex flex-col gap-2 relative">
+                    <div className="flex justify-between items-center bg-blue-600/20 px-4 py-1 rounded-t-lg border-l-4 border-blue-500">
+                        <span className="text-blue-400 font-black text-xs uppercase tracking-widest">PLAYER 1</span>
+                        <div className="flex items-center gap-2">
+                            <div className="w-32 h-2 bg-slate-800 rounded-full overflow-hidden">
+                                <div className="h-full bg-blue-500 transition-all duration-500" style={{ width: `${p1Pos}%` }}></div>
+                            </div>
+                            <span className="text-amber-400 font-black text-xs min-w-[3ch]">{p1Pos}%</span>
+                        </div>
                     </div>
                     <RacingTrack player={1} pos={p1Pos} color="bg-blue-500" />
                 </div>
 
                 {isMultiplayer && (
-                    <div className="flex flex-col gap-4">
-                        <div className="flex justify-between items-end mb-1">
-                            <span className="text-white font-black text-xs uppercase tracking-widest pl-2">PLAYER 2</span>
-                            <span className="text-amber-400 font-black text-xs">{p2Pos}%</span>
+                    <div className="flex flex-col gap-2 relative">
+                        <div className="flex justify-between items-center bg-purple-600/20 px-4 py-1 rounded-t-lg border-l-4 border-purple-500">
+                            <span className="text-purple-400 font-black text-xs uppercase tracking-widest">PLAYER 2</span>
+                            <div className="flex items-center gap-2">
+                                <div className="w-32 h-2 bg-slate-800 rounded-full overflow-hidden">
+                                    <div className="h-full bg-purple-500 transition-all duration-500" style={{ width: `${p2Pos}%` }}></div>
+                                </div>
+                                <span className="text-amber-400 font-black text-xs min-w-[3ch]">{p2Pos}%</span>
+                            </div>
                         </div>
                         <RacingTrack player={2} pos={p2Pos} color="bg-purple-500" />
                     </div>
@@ -254,8 +275,12 @@ export default function BalapAngkaGame({ mode, onExit }) {
                     <div className="flex flex-col items-center justify-center p-4 text-center bg-indigo-900/10 rounded-[2rem] border-4 border-dashed border-white/10">
                         <h3 className="text-lg font-black text-amber-400 mb-1 uppercase italic">TANTANGAN WAKTU!</h3>
                         <p className="text-indigo-200 font-bold text-[10px] max-w-[180px]">Capai garis finish sebelum waktu habis untuk skor tertinggi!</p>
-                        <div className="mt-2 animate-bounce flex items-center justify-center">
-                            <span className="text-5xl">🚩</span>
+                        <div className="mt-6 animate-bounce flex items-center justify-center">
+                            <img
+                                src={flagImg}
+                                alt="Game Flag"
+                                className="w-24 h-24 object-contain drop-shadow-[0_10px_15px_rgba(0,0,0,0.4)]"
+                            />
                         </div>
                     </div>
                 )}
