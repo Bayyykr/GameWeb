@@ -5,6 +5,7 @@ import hitungAngkaImg from '../../assets/images/hitung_angka.png';
 import ModeSelectionModal from '../../components/game/ModeSelectionModal';
 import BattleSihirGame from '../../components/game/BattleSihirGame';
 import BalapAngkaGame from '../../components/game/BalapAngkaGame';
+import LabirinHitungGame from '../../components/game/LabirinHitungGame';
 import magicBg from '../../assets/images/magic_bg.jpg';
 
 // Mode Icons
@@ -12,6 +13,7 @@ import battleSihirIcon from '../../assets/images/battle_sihir.png';
 import balapAngkaIcon from '../../assets/images/balap_angka.png';
 import labirinHitungIcon from '../../assets/images/labirin_hitung.png';
 import pestaAngkaIcon from '../../assets/images/pesta_angka.png';
+import mageAvatar from '../../assets/mage-avatar.png';
 
 const TrophyIcon = () => (
     <svg viewBox="0 0 24 24" className="w-10 h-10 drop-shadow-[0_0_8px_rgba(251,191,36,0.8)]" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -47,7 +49,7 @@ function HitungAngka() {
             id: 'labirin-hitung',
             title: 'Labirin Hitung',
             description: 'Cari jalan keluar dengan memecahkan teka-teki logika.',
-            icon: <img src={labirinHitungIcon} alt="Labirin Hitung" className="w-20 h-20 object-contain drop-shadow-xl" />,
+            icon: <img src={mageAvatar} alt="Labirin Hitung" className="w-20 h-20 object-contain drop-shadow-xl" />,
             color: 'from-emerald-400 to-teal-600',
             shadow: 'shadow-teal-900/40'
         },
@@ -62,7 +64,10 @@ function HitungAngka() {
     ];
 
     const handleModeClick = (modeId) => {
-        if (modeId === 'battle-sihir' || modeId === 'balap-angka') {
+        if (modeId === 'labirin-hitung') {
+            setSelectedMode(modeId);
+            setGameMode('normal'); // Bypass modal with a default mode
+        } else if (modeId === 'battle-sihir' || modeId === 'balap-angka') {
             setSelectedMode(modeId);
             setShowModal(true);
         } else {
@@ -184,6 +189,9 @@ function HitungAngka() {
                         )}
                         {selectedMode === 'balap-angka' && (
                             <BalapAngkaGame mode={gameMode} onExit={handleExitGame} />
+                        )}
+                        {selectedMode === 'labirin-hitung' && (
+                            <LabirinHitungGame mode={gameMode} onExit={handleExitGame} />
                         )}
                     </div>,
                     document.body
