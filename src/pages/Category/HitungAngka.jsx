@@ -6,6 +6,7 @@ import ModeSelectionModal from '../../components/game/ModeSelectionModal';
 import BattleSihirGame from '../../components/game/BattleSihirGame';
 import BalapAngkaGame from '../../components/game/BalapAngkaGame';
 import LabirinHitungGame from '../../components/game/LabirinHitungGame';
+import PestaAngkaGame from '../../components/game/PestaAngkaGame';
 import magicBg from '../../assets/images/magic_bg.jpg';
 
 // Mode Icons
@@ -49,7 +50,7 @@ function HitungAngka() {
             id: 'labirin-hitung',
             title: 'Labirin Hitung',
             description: 'Cari jalan keluar dengan memecahkan teka-teki logika.',
-            icon: <img src={mageAvatar} alt="Labirin Hitung" className="w-20 h-20 object-contain drop-shadow-xl" />,
+            icon: <img src={labirinHitungIcon} alt="Labirin Hitung" className="w-20 h-20 object-contain drop-shadow-xl" />,
             color: 'from-emerald-400 to-teal-600',
             shadow: 'shadow-teal-900/40'
         },
@@ -64,7 +65,7 @@ function HitungAngka() {
     ];
 
     const handleModeClick = (modeId) => {
-        if (modeId === 'labirin-hitung') {
+        if (modeId === 'labirin-hitung' || modeId === 'pesta-angka') {
             setSelectedMode(modeId);
             setGameMode('normal'); // Bypass modal with a default mode
         } else if (modeId === 'battle-sihir' || modeId === 'balap-angka') {
@@ -192,6 +193,9 @@ function HitungAngka() {
                         )}
                         {selectedMode === 'labirin-hitung' && (
                             <LabirinHitungGame mode={gameMode} onExit={handleExitGame} />
+                        )}
+                        {selectedMode === 'pesta-angka' && (
+                            <PestaAngkaGame mode={gameMode} onExit={handleExitGame} />
                         )}
                     </div>,
                     document.body
