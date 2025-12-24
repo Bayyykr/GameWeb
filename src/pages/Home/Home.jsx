@@ -3,6 +3,8 @@ import AnimatedBanner from './AnimatedBanner'
 import CategoryCard from '../../components/ui/CategoryCard'
 import hitungAngkaImg from '../../assets/images/hitung_angka.png'
 import bahasaKataImg from '../../assets/images/bahasa_kata.png'
+import logikaFokusImg from '../../assets/images/logika_fokus.png'
+import refleksKonsentrasiImg from '../../assets/images/refleks_konsentrasi.png'
 
 function Home() {
     const categories = [
@@ -25,14 +27,14 @@ function Home() {
             description: 'Uji ketajaman pola dan daya ingat melalui labirin otak.',
             category: 'logika-fokus',
             color: 'amber',
-            icon: null
+            icon: logikaFokusImg
         },
         {
             title: 'Refleks & Konsentrasi',
             description: 'Tingkatkan kecepatan refleks dan fokus dalam tantangan cepat.',
             category: 'refleks-konsentrasi',
             color: 'rose',
-            icon: null
+            icon: refleksKonsentrasiImg
         }
     ]
 
