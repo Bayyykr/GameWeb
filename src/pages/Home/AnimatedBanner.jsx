@@ -1,11 +1,12 @@
 import React from 'react'
 import wizardMascot from '../../assets/images/wizard_mascot.png'
+import magicBg from '../../assets/images/magic_bg.jpg'
 
 function AnimatedBanner() {
     return (
         <div className="relative overflow-hidden rounded-[3.25rem] bg-gradient-to-br from-indigo-900/80 via-purple-900/80 to-indigo-800/80 p-8 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-4 border-white/10 mt-6 backdrop-blur-md">
             {/* Background Image subtle overlay */}
-            <div className="absolute inset-0 bg-[url('/src/assets/images/magic_bg.jpg')] opacity-20 bg-cover bg-center mix-blend-overlay"></div>
+            <div className="absolute inset-0 opacity-20 bg-cover bg-center mix-blend-overlay" style={{ backgroundImage: `url(${magicBg})` }}></div>
 
             <div className="relative z-10 flex flex-col lg:flex-row items-center gap-10">
                 <div className="flex-1 text-center lg:text-left">
