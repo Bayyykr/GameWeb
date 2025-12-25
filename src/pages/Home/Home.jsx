@@ -44,7 +44,7 @@ function Home() {
         <div className="space-y-16">
             <AnimatedBanner />
 
-            <section>
+            <section id="dunia-belajar">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
                     <div>
                         <h2 className="text-4xl font-black text-white tracking-tight drop-shadow-[0_4px_0_#1e1b4b]">PILIH DUNIA BELAJARMU</h2>

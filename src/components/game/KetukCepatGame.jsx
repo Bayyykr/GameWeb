@@ -1,4 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+import monsterBiru from '../../assets/images/monster_biru.png';
+import monsterHijau from '../../assets/images/monster_hijau.png';
+import monsterMerah from '../../assets/images/monster_merah.png';
+import monsterOren from '../../assets/images/monster_oren.png';
+import monsterUngu from '../../assets/images/monster_ungu.png';
+
 
 export default function KetukCepatGame({ onExit }) {
     const [score, setScore] = useState(0);
@@ -9,7 +15,8 @@ export default function KetukCepatGame({ onExit }) {
     const timerRef = useRef(null);
     const monsterTimerRef = useRef(null);
 
-    const MONSTERS = ['👾', '👹', '👺', '👻', '👽', '🤖'];
+    const MONSTERS = [monsterBiru, monsterHijau, monsterMerah, monsterOren, monsterUngu];
+
 
     const startGame = () => {
         setScore(0);
@@ -94,7 +101,12 @@ export default function KetukCepatGame({ onExit }) {
                                 className={`absolute inset-0 flex items-center justify-center text-4xl md:text-6xl transition-all duration-150 transform
                                     ${activeHole === i ? 'translate-y-0 opacity-100 scale-100 cursor-pointer' : 'translate-y-12 opacity-0 scale-50 pointer-events-none'}`}
                             >
-                                <span className="hover:scale-110 active:scale-90 transition-transform">{MONSTERS[monsterIdx]}</span>
+                                <img
+                                    src={MONSTERS[monsterIdx]}
+                                    alt="Monster"
+                                    className="w-4/5 h-4/5 object-contain hover:scale-110 active:scale-90 transition-transform"
+                                />
+
                             </button>
                         </div>
                     ))}

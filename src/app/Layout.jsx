@@ -22,7 +22,7 @@ function Layout() {
                             <HomeIcon />
                         </div>
                         <span className="text-3xl font-black tracking-tighter text-white drop-shadow-[0_4px_0_#1e1b4b]">
-                            MAGIC<span className="text-amber-400">EDU</span>
+                            AOC FUN <span className="text-amber-400">KIDZ</span>
                         </span>
                     </Link>
 
@@ -42,13 +42,13 @@ function Layout() {
             <footer className="mt-5 bg-indigo-950/90 border-t-8 border-amber-500/20 py-12 backdrop-blur-md">
                 <div className="max-w-7xl mx-auto px-4 text-center">
                     <div className="inline-block bg-white/5 p-8 rounded-[3rem] border-2 border-white/10 mb-8">
-                        <h2 className="text-2xl font-black text-amber-400 mb-2">MagicEdu Academy</h2>
+                        <h2 className="text-2xl font-black text-amber-400 mb-2">AOC Fun Kidz</h2>
                         <p className="text-slate-400 font-bold max-w-md mx-auto">
                             Tempat di mana belajar terasa seperti petualangan sihir yang tak terbatas. Bergabunglah sekarang!
                         </p>
                     </div>
                     <div className="text-slate-500 font-bold text-sm tracking-widest uppercase">
-                        &copy; 2025 MagicEdu. All Rights Reserved.
+                        &copy; 2025 AOC Fun Kidz. All Rights Reserved.
                     </div>
                 </div>
             </footer>
