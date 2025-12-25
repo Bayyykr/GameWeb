@@ -1,10 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import AnimatedBanner from './AnimatedBanner'
 import CategoryCard from '../../components/ui/CategoryCard'
 import hitungAngkaImg from '../../assets/images/hitung_angka.png'
 import bahasaKataImg from '../../assets/images/bahasa_kata.png'
 import logikaFokusImg from '../../assets/images/logika_fokus.png'
 import refleksKonsentrasiImg from '../../assets/images/refleks_konsentrasi.png'
+import pratinjauGameImg from '../../assets/pratinjau_game.png'
 
 function Home() {
     const categories = [
@@ -48,9 +50,9 @@ function Home() {
                         <h2 className="text-4xl font-black text-white tracking-tight drop-shadow-[0_4px_0_#1e1b4b]">PILIH DUNIA BELAJARMU</h2>
                         <p className="text-slate-300 font-bold text-lg mt-2">Pilih tantangan dan kumpulkan poin pengalaman!</p>
                     </div>
-                    <button className="bg-amber-400 text-indigo-950 px-6 py-2 rounded-xl font-black shadow-[0_4px_0_0_#92400e] hover:scale-105 transition-transform active:translate-y-1 active:shadow-none border-2 border-white/20">
+                    <Link to="/games" className="bg-amber-400 text-indigo-950 px-6 py-2 rounded-xl font-black shadow-[0_4px_0_0_#92400e] hover:scale-105 transition-transform active:translate-y-1 active:shadow-none border-2 border-white/20">
                         LIHAT SEMUA
-                    </button>
+                    </Link>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -70,16 +72,16 @@ function Home() {
                         <p className="text-slate-200 text-xl mb-10 leading-relaxed font-bold">
                             モンスター (Monster) sedang menyerang! Gunakan kecepatan hitunganmu untuk merapal mantra api dan es. Lindungi akademi!
                         </p>
-                        <button className="bg-gradient-to-b from-green-400 to-green-600 text-white px-10 py-5 rounded-[2rem] text-2xl font-black shadow-[0_8px_0_0_#166534] transition-all hover:scale-110 active:translate-y-2 active:shadow-none border-t-4 border-white/40">
+                        <Link to="/games" className="bg-gradient-to-b from-green-400 to-green-600 text-white px-10 py-5 rounded-[2rem] text-2xl font-black shadow-[0_8px_0_0_#166534] transition-all hover:scale-110 active:translate-y-2 active:shadow-none border-t-4 border-white/40">
                             MAIN SEKARANG
-                        </button>
+                        </Link>
                     </div>
-                    <div className="bg-indigo-950/80 rounded-[3rem] p-6 border-4 border-white/10 h-80 flex flex-col items-center justify-center relative group">
-                        <div className="absolute inset-0 bg-blue-500/10 rounded-[3rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <div className="w-24 h-24 bg-amber-400 rounded-full flex items-center justify-center text-5xl mb-4 group-hover:scale-110 transition-transform cursor-pointer">
-                            ▶️
-                        </div>
-                        <div className="text-slate-400 font-black text-xl tracking-widest uppercase">PRATINJAU GAME</div>
+                    <div className="bg-indigo-950/80 rounded-[3rem] border-4 border-white/10 h-80 flex flex-col items-center justify-center relative group overflow-hidden shadow-2xl">
+                        <img
+                            src={pratinjauGameImg}
+                            alt="Pratinjau Game"
+                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-90 group-hover:opacity-100"
+                        />
                     </div>
                 </div>
             </section>

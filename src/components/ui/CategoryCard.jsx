@@ -49,10 +49,7 @@ function CategoryCard({ title, description, category, color, icon: Icon }) {
                 MULAI MAIN
             </div>
 
-            {/* Corner Rank/Icon */}
-            <div className="absolute top-4 right-4 bg-yellow-400 text-indigo-900 w-10 h-10 rounded-full flex items-center justify-center font-black border-2 border-white shadow-md text-xs group-hover:animate-bounce">
-                LV1
-            </div>
+
         </Link>
     )
 }

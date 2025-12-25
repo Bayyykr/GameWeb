@@ -6,6 +6,7 @@ import HitungAngka from '../pages/Category/HitungAngka'
 import BahasaKata from '../pages/Category/BahasaKata'
 import LogikaFokus from '../pages/Category/LogikaFokus'
 import RefleksKonsentrasi from '../pages/Category/RefleksKonsentrasi'
+import Games from '../pages/Games/Games'
 import Profile from '../pages/Profile/Profile'
 import Settings from '../pages/Settings/Settings'
 
@@ -15,6 +16,7 @@ function Router() {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
+                    <Route path="games" element={<Games />} />
                     <Route path="category/hitung-angka" element={<HitungAngka />} />
                     <Route path="category/bahasa-kata" element={<BahasaKata />} />
                     <Route path="category/logika-fokus" element={<LogikaFokus />} />

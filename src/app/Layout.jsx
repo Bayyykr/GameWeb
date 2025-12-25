@@ -27,25 +27,10 @@ function Layout() {
                     </Link>
 
                     <div className="flex items-center gap-6 pr-4">
-                        <NavLink to="/profile" className={navLinkClass}>
-                            {({ isActive }) => (
-                                <>
-                                    Profile
-                                    {isActive && <div className="absolute -bottom-1 left-0 w-full h-1.5 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full shadow-[0_0_10px_rgba(251,191,36,0.8)]"></div>}
-                                </>
-                            )}
-                        </NavLink>
-                        <NavLink to="/settings" className={navLinkClass}>
-                            {({ isActive }) => (
-                                <>
-                                    Settings
-                                    {isActive && <div className="absolute -bottom-1 left-0 w-full h-1.5 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full shadow-[0_0_10px_rgba(251,191,36,0.8)]"></div>}
-                                </>
-                            )}
-                        </NavLink>
-                        <button className="bg-gradient-to-b from-green-400 to-green-600 hover:from-green-300 hover:to-green-500 text-white px-8 py-3 rounded-2xl text-lg font-black shadow-[0_6px_0_0_#166534] transition-all active:translate-y-1 active:shadow-none border-t-2 border-white/30 ml-2">
+
+                        <Link to="/games" className="bg-gradient-to-b from-green-400 to-green-600 hover:from-green-300 hover:to-green-500 text-white px-8 py-3 rounded-2xl text-lg font-black shadow-[0_6px_0_0_#166534] transition-all active:translate-y-1 active:shadow-none border-t-2 border-white/30 ml-2">
                             MAIN!
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </nav>
@@ -54,7 +39,7 @@ function Layout() {
                 <Outlet />
             </main>
 
-            <footer className="mt-20 bg-indigo-950/90 border-t-8 border-amber-500/20 py-12 backdrop-blur-md">
+            <footer className="mt-5 bg-indigo-950/90 border-t-8 border-amber-500/20 py-12 backdrop-blur-md">
                 <div className="max-w-7xl mx-auto px-4 text-center">
                     <div className="inline-block bg-white/5 p-8 rounded-[3rem] border-2 border-white/10 mb-8">
                         <h2 className="text-2xl font-black text-amber-400 mb-2">MagicEdu Academy</h2>

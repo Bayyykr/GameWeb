@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logikaFokusImg from '../../assets/images/logika_fokus.png';
 import PolaGambarGame from '../../components/game/PolaGambarGame';
 import CariBayanganGame from '../../components/game/CariBayanganGame';
@@ -21,7 +21,14 @@ const TrophyIcon = () => (
 );
 
 function LogikaFokus() {
-    const [gameMode, setGameMode] = useState(null);
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    // Get initial game from URL to prevent "flicker"
+    const params = new URLSearchParams(location.search);
+    const initialGame = params.get('game');
+
+    const [gameMode, setGameMode] = useState(initialGame);
 
     const gameModes = [
         {
@@ -55,6 +62,13 @@ function LogikaFokus() {
     };
 
     const handleExitGame = () => {
+        // If we came from the Games page, go back there immediately to prevent world flash
+        const params = new URLSearchParams(location.search);
+        if (params.get('from') === 'games') {
+            navigate('/games');
+            return;
+        }
+
         setGameMode(null);
     };
 
@@ -69,7 +83,7 @@ function LogikaFokus() {
     }, [gameMode]);
 
     return (
-        <div className="space-y-12 pb-12">
+        <div className="space-y-12">
             {!gameMode && (
                 <>
                     {/* Header / Hero Section */}
@@ -83,9 +97,12 @@ function LogikaFokus() {
                                 <img src={logikaFokusImg} alt="Logika & Fokus" className="w-56 h-56 md:w-72 md:h-72 object-contain drop-shadow-[0_20px_20px_rgba(0,0,0,0.5)]" />
                             </div>
                             <div className="text-center md:text-left">
-                                <Link to="/" className="group inline-flex items-center bg-red-500 text-white px-8 py-3 rounded-2xl font-black text-sm mb-8 shadow-[0_6px_0_0_#991b1b] hover:-translate-y-1 active:translate-y-1 active:shadow-none transition-all border-t-2 border-white/30 uppercase tracking-widest whitespace-nowrap">
+                                <button
+                                    onClick={() => navigate(-1)}
+                                    className="group inline-flex items-center bg-red-500 text-white px-8 py-3 rounded-2xl font-black text-sm mb-8 shadow-[0_6px_0_0_#991b1b] hover:-translate-y-1 active:translate-y-1 active:shadow-none transition-all border-t-2 border-white/30 uppercase tracking-widest whitespace-nowrap"
+                                >
                                     <span className="mr-3 text-xl group-hover:-translate-x-1 transition-transform">◀</span> KEMBALI
-                                </Link>
+                                </button>
                                 <h1 className="text-5xl md:text-8xl font-black text-white mb-4 tracking-tighter drop-shadow-[0_8px_0_#1e1b4b] uppercase italic leading-none">
                                     DUNIA <br /><span className="text-amber-400 drop-shadow-[0_8px_0_#92400e]">LOGIKA</span>
                                 </h1>
